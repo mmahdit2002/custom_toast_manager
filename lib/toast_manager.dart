@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'dart:ui'; // For ImageFilter
+import 'dart:ui';
 
 enum ToastType { success, warning, error }
 
@@ -276,8 +276,6 @@ class _ToastWidgetState extends State<_ToastWidget> with SingleTickerProviderSta
     );
   }
 
-  // Replace the previous _buildStyledContainer and _buildContent with these:
-
   Widget _buildInnerContent(Color textColor) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 18.0),
@@ -322,10 +320,8 @@ class _ToastWidgetState extends State<_ToastWidget> with SingleTickerProviderSta
           gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [baseColor.withOpacity(0.3), baseColor.withOpacity(0.1)]),
         );
 
-        // For glassmorphism we clip the blurred area only — we don't clip the outer widget that could show shadows.
         return Container(
           key: _toastKey,
-          // outer container (no clipping) so any outer shadows (if you add them later) remain visible
           child: ClipRRect(
             borderRadius: BorderRadius.circular(radius),
             child: BackdropFilter(
@@ -398,7 +394,6 @@ class _ToastWidgetState extends State<_ToastWidget> with SingleTickerProviderSta
         break;
     }
 
-    // Default: just render a decorated container (no ClipRRect) — this allows BoxShadow to be visible.
     return Container(key: _toastKey, decoration: decoration, child: _buildInnerContent(textColor));
   }
 }
